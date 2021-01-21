@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 
-import { PostsService } from "../posts.service";
+import { PostsService } from '../posts.service';
 import { Post } from '../post.model'
 
 @Component({
@@ -25,7 +25,7 @@ export class PostListComponent implements OnInit, OnDestroy {
       });
  }
 
- onDelete(id: string) {
+  onDelete(id: string) {
     this.postsService.deletePost(id);
     console.log('delete post id: ', id);
   }
