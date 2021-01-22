@@ -1,9 +1,13 @@
+/* Angular Module imports */
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 
+/* rxjs imports */
 import { map } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
+/* Data model imports */
 import { Post } from "./post.model";
 
 @Injectable({providedIn: 'root'})
@@ -11,7 +15,7 @@ export class PostsService {
   private _posts: Post[] = [];
   private _postsUpdated = new Subject<Post[]>();
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private _router: Router) {}
 
   getPosts() {
     return this._http.get<{message: string, posts: any}>('http://localhost:8080/api/posts')
@@ -56,6 +60,7 @@ export class PostsService {
         post.id = data.id;
         this._posts.push(post);
         this._postsUpdated.next([...this._posts]);
+        this._router.navigate(['/']);
       });
   }
 
@@ -69,6 +74,7 @@ export class PostsService {
     this._http.put<{ message: string, id: string }>('http://localhost:8080/api/posts/' + id, post)
       .subscribe((data) => {
         console.log(data.message);
+        this._router.navigate(['/']);
 
         // update local copy of post optimistically
         // TODO: understand what this is doing
