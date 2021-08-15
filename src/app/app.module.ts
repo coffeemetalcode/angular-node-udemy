@@ -3,7 +3,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 /* Angular Material Module Imports */
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 /* Application Module Imports */
@@ -21,6 +23,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { ScratchComponent } from './scratch/scratch.component';
 
 @NgModule({
   declarations: [
@@ -28,19 +31,22 @@ import { PostListComponent } from './posts/post-list/post-list.component';
     HeaderComponent,
     PostCreateComponent,
     PostListComponent,
+    ScratchComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     MatButtonModule,
     MatCardModule,
     MatExpansionModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
     MatToolbarModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

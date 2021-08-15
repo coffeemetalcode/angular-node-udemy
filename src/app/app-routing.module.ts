@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
+import { ScratchComponent } from './scratch/scratch.component';
 
 const routes: Routes = [
-  { path: '', component: PostListComponent },
+  { path: '', component: ScratchComponent },
+  // { path: '', component: PostListComponent },
   { path: 'create', component: PostCreateComponent },
   { path: 'edit/:id', component: PostCreateComponent }
 ];
