@@ -23,9 +23,10 @@ export class PostsService {
       // console.log('The original data', data.posts);
       return data.posts.map((post) => {
         return {
+          id: post._id,
           title: post.title,
           content: post.content,
-          id: post._id
+          imageUrl: post.imageUrl
         }
       });
       
@@ -48,16 +49,20 @@ export class PostsService {
     return this._postsUpdated.asObservable();
   }
 
-  addPost(id: string, title: string, content: string) {
-    const post: Post = {
-      id: id,
-      title: title,
-      content: content
-    };
+  addPost(title: string, content: string, image: File) {
+    const postData = new FormData();
+    postData.append('title', title);
+    postData.append('content', content);
+    postData.append('image', image, title);
 
-    this._http.post<{ message: string, id: string }>('http://localhost:8080/api/posts', post)
+    this._http.post<{ message: string, post: Post }>('http://localhost:8080/api/posts', postData)
       .subscribe((data) => {
-        post.id = data.id;
+        const post: Post = {
+          id: data.post.id,
+          title: data.post.title,
+          content: data.post.content,
+          imageUrl: data.post.imageUrl
+        }
         this._posts.push(post);
         this._postsUpdated.next([...this._posts]);
         this._router.navigate(['/']);
@@ -68,7 +73,8 @@ export class PostsService {
     const post: Post = {
       id: id,
       title: title,
-      content: content
+      content: content,
+      imageUrl: null
     };
 
     this._http.put<{ message: string, id: string }>('http://localhost:8080/api/posts/' + id, post)
